@@ -12,6 +12,6 @@ public class KafkaTestRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        producer.sendNotificationMessage("key", "안녕하세요 테스트 진행중입니다");
+        producer.sendUsageMessage("key", "사용량 알림입니다");
     }
 }

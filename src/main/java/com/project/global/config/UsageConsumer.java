@@ -17,6 +17,6 @@ public class UsageConsumer {
     )
     public void consume(String message) {
         System.out.println("usage consumer received data : " + message);
-        producer.sendUsageMessage("key", message);
+        producer.sendNotificationMessage("key", "데이터 사용량 누적 임계치 경고 알림입니다");
     }
 }

@@ -32,6 +32,21 @@ spring:
     redis:
       url: redis://${REDIS_USERNAME:default}:${REDIS_PASSWORD:}@${REDIS_ENDPOINT:localhost:6379}
 
+  kafka:
+    bootstrap-servers: pkc-oxqxx9.us-east-1.aws.confluent.cloud:9092
+
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username='EPO6DS6OXW7GYVEE'
+        password='cfltJj+U/TvM2TfzfqxpXIu5xDE/bPGe5sfIff5mrLZ9Usx4K9LudKBWPLIGG3QQ';
+    consumer:
+      auto-offset-reset: earliest
+
+
+
 server:
   port: 8080
 

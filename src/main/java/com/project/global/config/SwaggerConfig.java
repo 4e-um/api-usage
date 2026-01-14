@@ -16,7 +16,7 @@ public class SwaggerConfig {
   private String projectVersion;
 
   @Bean
-  public OpenAPI openAPI() {
+  public OpenAPI openApi() {
     return new OpenAPI()
         .info(
             new Info()

@@ -6,12 +6,11 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor
-public enum ExampleErrorCode implements BaseErrorCode{
+public enum ExampleErrorCode implements BaseErrorCode {
+  EXAMPLE_NOT_FOUND(HttpStatus.BAD_REQUEST, "EXAMPLE_001", "Example을 찾을 수 없습니다"),
+  ;
 
-    EXAMPLE_NOT_FOUND(HttpStatus.BAD_REQUEST, "EXAMPLE_001", "Example을 찾을 수 없습니다"),
-    ;
-
-    private final HttpStatus httpStatus;
-    private final String customCode;
-    private final String message;
+  private final HttpStatus httpStatus;
+  private final String customCode;
+  private final String message;
 }

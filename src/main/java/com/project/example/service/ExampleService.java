@@ -11,16 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ExampleService {
 
-    private final ExampleRepository exampleRepository;
+  private final ExampleRepository exampleRepository;
 
-    @Transactional
-    public ExampleEntity find(Long exampleId) {
-        return exampleRepository.find(exampleId);
-    }
+  @Transactional
+  public ExampleEntity find(Long exampleId) {
+    return exampleRepository.find(exampleId);
+  }
 
-    @Transactional
-    public void save(SaveExampleRequest request) {
-        ExampleEntity exampleEntity = ExampleEntity.create(request);
-        exampleRepository.save(exampleEntity);
-    }
+  @Transactional
+  public void save(SaveExampleRequest request) {
+    ExampleEntity exampleEntity = ExampleEntity.create(request);
+    exampleRepository.save(exampleEntity);
+  }
 }

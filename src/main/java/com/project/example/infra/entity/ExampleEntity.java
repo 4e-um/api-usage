@@ -16,17 +16,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ExampleEntity {
 
-    @Id @GeneratedValue
-    private Long exampleId;
+  @Id @GeneratedValue private Long exampleId;
 
-    private String exampleName;
+  private String exampleName;
 
-    private String exampleContent;
+  private String exampleContent;
 
-    public static ExampleEntity create(SaveExampleRequest request) {
-        return ExampleEntity.builder()
-                .exampleName(request.exampleName())
-                .exampleContent(request.exampleContent())
-                .build();
-    }
+  public static ExampleEntity create(SaveExampleRequest request) {
+    return ExampleEntity.builder()
+        .exampleName(request.exampleName())
+        .exampleContent(request.exampleContent())
+        .build();
+  }
 }

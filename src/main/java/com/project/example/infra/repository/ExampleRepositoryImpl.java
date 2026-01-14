@@ -8,16 +8,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class ExampleRepositoryImpl implements ExampleRepository{
+public class ExampleRepositoryImpl implements ExampleRepository {
 
-    private final ExampleJpaRepository exampleJpaRepository;
+  private final ExampleJpaRepository exampleJpaRepository;
 
-    public ExampleEntity find(Long exampleId) {
-        return exampleJpaRepository.findById(exampleId)
-                .orElseThrow(() -> new ApplicationException(ExampleErrorCode.EXAMPLE_NOT_FOUND));
-    }
+  public ExampleEntity find(Long exampleId) {
+    return exampleJpaRepository
+        .findById(exampleId)
+        .orElseThrow(() -> new ApplicationException(ExampleErrorCode.EXAMPLE_NOT_FOUND));
+  }
 
-    public void save(ExampleEntity example) {
-        exampleJpaRepository.save(example);
-    }
+  public void save(ExampleEntity example) {
+    exampleJpaRepository.save(example);
+  }
 }

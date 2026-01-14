@@ -11,14 +11,13 @@ import org.springframework.kafka.core.ConsumerFactory;
 @EnableKafka
 public class KafkaConfig {
 
-    @Bean
-    public KafkaListenerContainerFactory<?> kafkaListenerContainerFactory(
-            ConsumerFactory<String, String> consumerFactory
-    ) {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory);
-        factory.setAutoStartup(true); // 기본값이 true
-        return factory;
-    }
+  @Bean
+  public KafkaListenerContainerFactory<?> kafkaListenerContainerFactory(
+      ConsumerFactory<String, String> consumerFactory) {
+    ConcurrentKafkaListenerContainerFactory<String, String> factory =
+        new ConcurrentKafkaListenerContainerFactory<>();
+    factory.setConsumerFactory(consumerFactory);
+    factory.setAutoStartup(true); // 기본값이 true
+    return factory;
+  }
 }

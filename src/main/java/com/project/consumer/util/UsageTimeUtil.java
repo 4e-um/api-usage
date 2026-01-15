@@ -11,11 +11,6 @@ public class UsageTimeUtil {
         return odt.format(DateTimeFormatter.ofPattern("yyyyMM"));
     }
 
-    public static String toYyyyMMdd(String isoTs) {
-        OffsetDateTime odt = OffsetDateTime.parse(isoTs, ISO);
-        return odt.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-    }
-
     public static long ttlToNextMonthWithBufferSec(String isoTs, int bufferDays) {
         OffsetDateTime now = OffsetDateTime.parse(isoTs, ISO);
 

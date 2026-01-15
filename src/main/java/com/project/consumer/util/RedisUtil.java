@@ -19,7 +19,10 @@ public class RedisUtil {
   private final StringRedisTemplate redisTemplate;
 
   private final DefaultRedisScript<List> script =
-      new DefaultRedisScript<>(UsageBatchLuaConstant.LUA, List.class);
+          new DefaultRedisScript<>(
+                  LuaScriptLoader.load("lua/usage_batch.lua"),
+                  List.class
+          );
 
   public List<String> applyUsageBatch(List<UsageEventSchema> events) {
     if (events == null || events.isEmpty()) {

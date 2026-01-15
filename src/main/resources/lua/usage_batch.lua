@@ -1,6 +1,3 @@
--- ARGV: [1] N 이후 반복 N개:
--- timeKey, subId, eventId, bytes, ts, ttlSec
-
 local out = {}
 local n = tonumber(ARGV[1])
 local idx = 2

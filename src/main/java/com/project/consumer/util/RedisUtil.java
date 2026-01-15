@@ -44,4 +44,28 @@ public class RedisUtil {
         return result == null ? List.of() : (List<String>) result;
 
     }
+
+    public void writePlanChangeBatch(List<CalculatedLimitSchema> limits) {
+        redisTemplate.executePipelined((RedisCallback<Void>) connection -> {
+            for (CalculatedLimitSchema limit : limits) {
+                String key = "limit:" + limit.yyyyMM() + ":" + limit.subscriptionId();
+
+                byte[] k = redisTemplate.getStringSerializer().serialize(key);
+                byte[] v = redisTemplate.getStringSerializer()
+                        .serialize(String.valueOf(limit.limit()));
+
+                connection.set(k, v);
+                connection.expire(k, limit.ttlSec());
+
+                String unitKey = "plan:unit:" + limit.subscriptionId();
+                byte[] uk = redisTemplate.getStringSerializer().serialize(unitKey);
+                byte[] uv = redisTemplate.getStringSerializer()
+                        .serialize(limit.unit());
+
+                connection.set(uk, uv);
+                connection.expire(uk, limit.ttlSec());
+            }
+            return null;
+        });
+    }
 }

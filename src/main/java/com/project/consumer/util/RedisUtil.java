@@ -1,6 +1,5 @@
 package com.project.consumer.util;
 
-import com.project.consumer.constant.UsageBatchLuaConstant;
 import com.project.producer.schema.CalculatedLimitSchema;
 import com.project.producer.schema.UsageEventSchema;
 import java.util.ArrayList;
@@ -19,10 +18,7 @@ public class RedisUtil {
   private final StringRedisTemplate redisTemplate;
 
   private final DefaultRedisScript<List> script =
-          new DefaultRedisScript<>(
-                  LuaScriptLoader.load("lua/usage_batch.lua"),
-                  List.class
-          );
+      new DefaultRedisScript<>(LuaScriptLoader.load("lua/usage_batch.lua"), List.class);
 
   public List<String> applyUsageBatch(List<UsageEventSchema> events) {
     if (events == null || events.isEmpty()) {

@@ -4,8 +4,7 @@ public final class UsageBatchLuaConstant {
 
   private UsageBatchLuaConstant() {}
 
-  public static final String LUA =
-      """
+  public static final String LUA = """
         -- ARGV:
         -- [1] N 이후 반복 N개:
         -- timeKey, subId, eventId, bytes, ts, ttlSec
@@ -83,5 +82,5 @@ public final class UsageBatchLuaConstant {
             end
         end
         return out
-    """;
+  """;
 }

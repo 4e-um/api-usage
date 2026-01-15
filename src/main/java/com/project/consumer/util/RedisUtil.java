@@ -22,7 +22,9 @@ public class RedisUtil {
       new DefaultRedisScript<>(UsageBatchLuaConstant.LUA, List.class);
 
   public List<String> applyUsageBatch(List<UsageEventSchema> events) {
-    if (events == null || events.isEmpty()) return List.of();
+    if (events == null || events.isEmpty()) {
+      return List.of();
+    }
 
     List<String> args = new ArrayList<>();
     args.add(String.valueOf(events.size()));
@@ -44,7 +46,7 @@ public class RedisUtil {
         (RedisCallback<Void>)
             connection -> {
               for (CalculatedLimitSchema limit : limits) {
-                String key = "limit:" + limit.yyyyMM() + ":" + limit.subscriptionId();
+                String key = "limit:" + limit.yearMonth() + ":" + limit.subscriptionId();
 
                 byte[] k = redisTemplate.getStringSerializer().serialize(key);
                 byte[] v =

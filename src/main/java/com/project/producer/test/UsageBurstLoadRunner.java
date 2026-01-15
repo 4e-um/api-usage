@@ -28,7 +28,7 @@ public class UsageBurstLoadRunner implements CommandLineRunner {
 
     int perThreadRate = EVENTS_PER_SECOND / THREADS;
 
-    long start = System.currentTimeMillis();
+    final long start = System.currentTimeMillis();
 
     for (int t = 0; t < THREADS; t++) {
       executor.submit(
@@ -56,6 +56,7 @@ public class UsageBurstLoadRunner implements CommandLineRunner {
                 try {
                   Thread.sleep(sleepMs);
                 } catch (InterruptedException ignored) {
+                  Thread.currentThread().interrupt();
                 }
               }
             }

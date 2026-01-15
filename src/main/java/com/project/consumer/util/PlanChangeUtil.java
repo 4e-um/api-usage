@@ -26,15 +26,15 @@ public class PlanChangeUtil {
 
     List<CalculatedLimitSchema> results = new ArrayList<>();
 
-    String yyyyMM;
+    String yearMonth;
     long finalLimit;
     String processedKey;
     Long added;
 
     for (PlanChangeSchema event : events) {
-      yyyyMM = toYyyyMM(event.changedAt().toString());
+      yearMonth = toYyyyMM(event.changedAt().toString());
 
-      processedKey = "processed:plan:" + yyyyMM + ":" + event.subscriptionId();
+      processedKey = "processed:plan:" + yearMonth + ":" + event.subscriptionId();
       added = redisTemplate.opsForSet().add(processedKey, event.eventId());
 
       redisTemplate.expire(
@@ -55,14 +55,14 @@ public class PlanChangeUtil {
       } else if ("DAY".equals(event.unit())) {
         finalLimit = event.allowanceAmount();
       } else {
-        finalLimit = getMonthFinalLimit(yyyyMM, event, prevUnit);
+        finalLimit = getMonthFinalLimit(yearMonth, event, prevUnit);
       }
 
       long ttlSec = UsageTimeUtil.ttlToNextMonthWithBufferSec(event.changedAt().toString(), 2);
 
       results.add(
           new CalculatedLimitSchema(
-              event.subscriptionId(), yyyyMM, finalLimit, ttlSec, event.unit()));
+              event.subscriptionId(), yearMonth, finalLimit, ttlSec, event.unit()));
     }
 
     return results;
@@ -74,7 +74,7 @@ public class PlanChangeUtil {
   }
 
   // 사용자가 월 기준 중도에 요금제를 변경했을 경우 사용 가능 데이터 집계 로직
-  private long getMonthFinalLimit(String yyyyMM, PlanChangeSchema event, String prevUnit) {
+  private long getMonthFinalLimit(String yearMonth, PlanChangeSchema event, String prevUnit) {
     OffsetDateTime kstTime =
         event.changedAt().atZoneSameInstant(ZoneId.of("Asia/Seoul")).toOffsetDateTime();
 
@@ -90,7 +90,7 @@ public class PlanChangeUtil {
       return event.allowanceAmount() * daysAfter / totalDays;
     }
 
-    String limitKey = "limit:" + yyyyMM + ":" + event.subscriptionId();
+    String limitKey = "limit:" + yearMonth + ":" + event.subscriptionId();
 
     long prevLimit = getPreviousLimit(limitKey);
 

@@ -15,14 +15,14 @@ public class UsageProducer {
   private final KafkaTemplate<String, String> kafkaTemplate;
   private final ObjectMapper objectMapper;
 
-  public void sendUsageEvent(long subscriptionId, long usageBytes, String yyyyMM, long ttlSec) {
+  public void sendUsageEvent(long subscriptionId, long usageBytes, String yearMonth, long ttlSec) {
     UsageEventSchema schema =
         new UsageEventSchema(
             UUID.randomUUID().toString(),
             subscriptionId,
             usageBytes,
             OffsetDateTime.now().toString(),
-            yyyyMM,
+            yearMonth,
             ttlSec);
 
     try {

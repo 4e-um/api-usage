@@ -290,6 +290,7 @@
       <property name="throwsIndent" value="4"/>
       <property name="lineWrappingIndentation" value="4"/>
       <property name="arrayInitIndent" value="2"/>
+      <property name="ignoredPatterns" value="\"\"\""/>
     </module>
     <!-- Suppression for block code until we find a way to detect them properly
          until https://github.com/checkstyle/checkstyle/issues/15769 -->

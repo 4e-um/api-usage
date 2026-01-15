@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class NotificationProducer {
-    private final KafkaTemplate<String, String> kafkaTemplate;
+  private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendNotification(String payload) {
-        kafkaTemplate.send("notification_topic", payload);
-    }
+  public void sendNotification(String payload) {
+    kafkaTemplate.send("notification_topic", payload);
+  }
 }

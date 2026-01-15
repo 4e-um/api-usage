@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.project.consumer.util.UsageTimeUtil.toYyyyMM;
-import static com.project.consumer.util.UsageTimeUtil.toYyyyMMdd;
 
 @Slf4j
 @Service

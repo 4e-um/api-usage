@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class UsageTimeUtil {
   private static final DateTimeFormatter ISO = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
-  public static String toYyyyMM(String isoTs) {
+  public static String toYearMonth(String isoTs) {
     OffsetDateTime odt = OffsetDateTime.parse(isoTs, ISO);
     return odt.format(DateTimeFormatter.ofPattern("yyyyMM"));
   }

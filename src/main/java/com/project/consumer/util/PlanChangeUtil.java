@@ -1,6 +1,6 @@
 package com.project.consumer.util;
 
-import static com.project.consumer.util.UsageTimeUtil.toYyyyMM;
+import static com.project.consumer.util.UsageTimeUtil.toYearMonth;
 
 import com.project.producer.schema.CalculatedLimitSchema;
 import com.project.producer.schema.PlanChangeSchema;
@@ -32,7 +32,7 @@ public class PlanChangeUtil {
     Long added;
 
     for (PlanChangeSchema event : events) {
-      yearMonth = toYyyyMM(event.changedAt().toString());
+      yearMonth = toYearMonth(event.changedAt().toString());
 
       processedKey = "processed:plan:" + yearMonth + ":" + event.subscriptionId();
       added = redisTemplate.opsForSet().add(processedKey, event.eventId());

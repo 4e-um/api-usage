@@ -1,10 +1,12 @@
 package com.project.example.infra.entity;
 
-import com.project.example.controller.dto.SaveExampleRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import com.project.example.controller.dto.SaveExampleRequest;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -16,16 +18,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ExampleEntity {
 
-  @Id @GeneratedValue private Long exampleId;
+    @Id @GeneratedValue private Long exampleId;
 
-  private String exampleName;
+    private String exampleName;
 
-  private String exampleContent;
+    private String exampleContent;
 
-  public static ExampleEntity create(SaveExampleRequest request) {
-    return ExampleEntity.builder()
-        .exampleName(request.exampleName())
-        .exampleContent(request.exampleContent())
-        .build();
-  }
+    public static ExampleEntity create(SaveExampleRequest request) {
+        return ExampleEntity.builder()
+                .exampleName(request.exampleName())
+                .exampleContent(request.exampleContent())
+                .build();
+    }
 }

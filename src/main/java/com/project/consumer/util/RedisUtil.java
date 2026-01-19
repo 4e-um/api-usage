@@ -72,7 +72,7 @@ public class RedisUtil {
                                 String unitKey = "plan:unit:" + limit.subscriptionId();
                                 byte[] uk = redisTemplate.getStringSerializer().serialize(unitKey);
                                 byte[] uv =
-                                        redisTemplate.getStringSerializer().serialize(limit.unit());
+                                        redisTemplate.getStringSerializer().serialize(limit.unit().name());
 
                                 connection.stringCommands().set(
                                         uk,

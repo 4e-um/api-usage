@@ -3,6 +3,7 @@ package com.project.producer;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import com.project.producer.test.PlanUnit;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class PlanChangeProducer {
 
     public void sendPlanChangeEvent(
             long subscriptionId,
-            String unit, // MONTH / DAILY / UNLIMITED
+            PlanUnit unit, // MONTH / DAILY / UNLIMITED
             long allowanceAmount,
             OffsetDateTime changedAt,
             String email,

@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import com.project.global.exception.ApplicationException;
 import com.project.global.exception.code.domain.GlobalErrorCode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 public class LuaScriptLoader {

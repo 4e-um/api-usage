@@ -21,7 +21,7 @@ public class LuaScriptLoader {
             return new String(is.readAllBytes(), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("Failed to load lua script");
-            throw new ApplicationException(GlobalErrorCode.)
+            throw new ApplicationException(GlobalErrorCode.LUA_SCRIPT_LOAD_INVALID);
         }
     }
 

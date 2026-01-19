@@ -14,40 +14,40 @@ import org.springframework.util.backoff.FixedBackOff;
 @EnableKafka
 public class KafkaConfig {
 
-  @Bean
-  public KafkaListenerContainerFactory<?> kafkaListenerContainerFactory(
-      ConsumerFactory<String, String> consumerFactory) {
-    ConcurrentKafkaListenerContainerFactory<String, String> factory =
-        new ConcurrentKafkaListenerContainerFactory<>();
+    @Bean
+    public KafkaListenerContainerFactory<?> kafkaListenerContainerFactory(
+            ConsumerFactory<String, String> consumerFactory) {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
 
-    factory.setConsumerFactory(consumerFactory);
+        factory.setConsumerFactory(consumerFactory);
 
-    factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
 
-    return factory;
-  }
+        return factory;
+    }
 
-  @Bean
-  public ConcurrentKafkaListenerContainerFactory<String, String> batchKafkaListenerContainerFactory(
-      ConsumerFactory<String, String> consumerFactory) {
-    ConcurrentKafkaListenerContainerFactory<String, String> factory =
-        new ConcurrentKafkaListenerContainerFactory<>();
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String>
+            batchKafkaListenerContainerFactory(ConsumerFactory<String, String> consumerFactory) {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
 
-    factory.setConsumerFactory(consumerFactory);
+        factory.setConsumerFactory(consumerFactory);
 
-    factory.setBatchListener(true);
+        factory.setBatchListener(true);
 
-    factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
 
-    factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
 
-    DefaultErrorHandler errorHandler =
-        new DefaultErrorHandler(
-            new FixedBackOff(1000L, 9) // 총 10번 시도(초기+9)
-            );
+        DefaultErrorHandler errorHandler =
+                new DefaultErrorHandler(
+                        new FixedBackOff(1000L, 9) // 총 10번 시도(초기+9)
+                        );
 
-    factory.setCommonErrorHandler(errorHandler);
+        factory.setCommonErrorHandler(errorHandler);
 
-    return factory;
-  }
+        return factory;
+    }
 }

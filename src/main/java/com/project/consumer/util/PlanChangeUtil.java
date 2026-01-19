@@ -74,8 +74,8 @@ public class PlanChangeUtil {
     }
 
     private long getPreviousLimit(String key) {
-        String v = redisTemplate.opsForValue().get(key);
-        return v == null ? 0L : Long.parseLong(v);
+        String value = redisTemplate.opsForValue().get(key);
+        return value == null ? 0L : Long.parseLong(value);
     }
 
     // 사용자가 월 기준 중도에 요금제를 변경했을 경우 사용 가능 데이터 집계 로직

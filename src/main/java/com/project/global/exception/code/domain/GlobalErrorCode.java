@@ -16,8 +16,7 @@ public enum GlobalErrorCode implements BaseErrorCode {
     NOTIFICATION_EVENT_PRODUCE_INVALID(
             HttpStatus.BAD_REQUEST, "COMMON_006", "Kafka Notification 이벤트 발행 과정에서 에러가 발생했습니다"),
     PLAN_CHANGE_EVENT_PRODUCE_INVALID(
-            HttpStatus.BAD_REQUEST, "COMMON_007", "Kafka PlanChange 이벤트 발행 과정에서 에러가 발생했습니다"),
-    ;
+            HttpStatus.BAD_REQUEST, "COMMON_007", "Kafka PlanChange 이벤트 발행 과정에서 에러가 발생했습니다");
 
     private final HttpStatus httpStatus;
     private final String customCode;

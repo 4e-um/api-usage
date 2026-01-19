@@ -48,17 +48,17 @@ public class RedisUtil {
                 (RedisCallback<Void>)
                         connection -> {
                             for (CalculatedLimitSchema limit : limits) {
-                                String key =
+                                String ke =
                                         "limit:" + limit.yearMonth() + ":" + limit.subscriptionId();
 
-                                byte[] k = redisTemplate.getStringSerializer().serialize(key);
-                                byte[] v =
+                                byte[] key = redisTemplate.getStringSerializer().serialize(ke);
+                                byte[] value =
                                         redisTemplate
                                                 .getStringSerializer()
                                                 .serialize(String.valueOf(limit.limit()));
 
-                                connection.set(k, v);
-                                connection.expire(k, limit.ttlSec());
+                                connection.set(key, value);
+                                connection.expire(key, limit.ttlSec());
 
                                 String unitKey = "plan:unit:" + limit.subscriptionId();
                                 byte[] uk = redisTemplate.getStringSerializer().serialize(unitKey);

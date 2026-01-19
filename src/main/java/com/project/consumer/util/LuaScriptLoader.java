@@ -25,6 +25,5 @@ public class LuaScriptLoader {
         }
     }
 
-    private LuaScriptLoader() {
-    }
+    private LuaScriptLoader() {}
 }

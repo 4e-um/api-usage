@@ -38,8 +38,8 @@ public class PlanChangeConsumer {
         }
         List<PlanChangeSchema> events = new ArrayList<>(records.size());
         try {
-            for (ConsumerRecord<String, String> record : records) {
-                events.add(objectMapper.readValue(record.value(), PlanChangeSchema.class));
+            for (ConsumerRecord<String, String> rec : records) {
+                events.add(objectMapper.readValue(rec.value(), PlanChangeSchema.class));
             }
 
             List<CalculatedLimitSchema> limits = planChangeUtil.calculate(events);

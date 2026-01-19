@@ -6,7 +6,10 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class UsageTimeUtil {
+
     private static final DateTimeFormatter ISO = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+
+    private UsageTimeUtil() {}
 
     public static String toYearMonth(String isoTs) {
         OffsetDateTime odt = OffsetDateTime.parse(isoTs, ISO);

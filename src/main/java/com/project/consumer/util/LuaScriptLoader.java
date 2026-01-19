@@ -3,9 +3,12 @@ package com.project.consumer.util;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import com.project.global.exception.ApplicationException;
+import com.project.global.exception.code.domain.GlobalErrorCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-@Component
+@Slf4j
 public class LuaScriptLoader {
 
     public static String load(String path) {
@@ -17,7 +20,10 @@ public class LuaScriptLoader {
 
             return new String(is.readAllBytes(), StandardCharsets.UTF_8);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load lua script", e);
+            log.error("Failed to load lua script");
+            throw new ApplicationException(GlobalErrorCode.)
         }
     }
+
+    private LuaScriptLoader() {}
 }

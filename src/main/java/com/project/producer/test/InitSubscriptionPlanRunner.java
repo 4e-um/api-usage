@@ -3,6 +3,7 @@ package com.project.producer.test;
 import java.time.OffsetDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import com.project.producer.PlanChangeProducer;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class InitSubscriptionPlanRunner implements CommandLineRunner {
@@ -43,6 +45,6 @@ public class InitSubscriptionPlanRunner implements CommandLineRunner {
                                     "%04d-%04d", random.nextInt(10000), random.nextInt(10000)));
         }
 
-        System.out.println("✅ Initial Plan Seeding Completed (1 ~ 10000)");
+        log.info("Initial Plan Seeding Completed (1 ~ 10000)");
     }
 }

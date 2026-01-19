@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.stereotype.Service;
 
 import com.project.producer.schema.CalculatedLimitSchema;
@@ -20,8 +22,11 @@ public class RedisUtil {
 
     private final StringRedisTemplate redisTemplate;
 
-    private final DefaultRedisScript<List> script =
-            new DefaultRedisScript<>(LuaScriptLoader.load("lua/usage_batch.lua"), List.class);
+    private final DefaultRedisScript<List<String>> script =
+            new DefaultRedisScript<>(
+                    LuaScriptLoader.load("lua/usage_batch.lua"),
+                    (Class<List<String>>) (Class<?>) List.class
+            );
 
     public List<String> applyUsageBatch(List<UsageEventSchema> events) {
         if (events == null || events.isEmpty()) {
@@ -57,16 +62,24 @@ public class RedisUtil {
                                                 .getStringSerializer()
                                                 .serialize(String.valueOf(limit.limit()));
 
-                                connection.set(key, value);
-                                connection.expire(key, limit.ttlSec());
+                                connection.stringCommands().set(
+                                        key,
+                                        value,
+                                        Expiration.seconds(limit.ttlSec()),
+                                        RedisStringCommands.SetOption.UPSERT
+                                );
 
                                 String unitKey = "plan:unit:" + limit.subscriptionId();
                                 byte[] uk = redisTemplate.getStringSerializer().serialize(unitKey);
                                 byte[] uv =
                                         redisTemplate.getStringSerializer().serialize(limit.unit());
 
-                                connection.set(uk, uv);
-                                connection.expire(uk, limit.ttlSec());
+                                connection.stringCommands().set(
+                                        uk,
+                                        uv,
+                                        Expiration.seconds(limit.ttlSec()),
+                                        RedisStringCommands.SetOption.UPSERT
+                                );
                             }
                             return null;
                         });

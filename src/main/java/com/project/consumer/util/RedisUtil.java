@@ -25,8 +25,7 @@ public class RedisUtil {
     private final DefaultRedisScript<List<String>> script =
             new DefaultRedisScript<>(
                     LuaScriptLoader.load("lua/usage_batch.lua"),
-                    (Class<List<String>>) (Class<?>) List.class
-            );
+                    (Class<List<String>>) (Class<?>) List.class);
 
     public List<String> applyUsageBatch(List<UsageEventSchema> events) {
         if (events == null || events.isEmpty()) {
@@ -62,24 +61,28 @@ public class RedisUtil {
                                                 .getStringSerializer()
                                                 .serialize(String.valueOf(limit.limit()));
 
-                                connection.stringCommands().set(
-                                        key,
-                                        value,
-                                        Expiration.seconds(limit.ttlSec()),
-                                        RedisStringCommands.SetOption.UPSERT
-                                );
+                                connection
+                                        .stringCommands()
+                                        .set(
+                                                key,
+                                                value,
+                                                Expiration.seconds(limit.ttlSec()),
+                                                RedisStringCommands.SetOption.UPSERT);
 
                                 String unitKey = "plan:unit:" + limit.subscriptionId();
                                 byte[] uk = redisTemplate.getStringSerializer().serialize(unitKey);
                                 byte[] uv =
-                                        redisTemplate.getStringSerializer().serialize(limit.unit().name());
+                                        redisTemplate
+                                                .getStringSerializer()
+                                                .serialize(limit.unit().name());
 
-                                connection.stringCommands().set(
-                                        uk,
-                                        uv,
-                                        Expiration.seconds(limit.ttlSec()),
-                                        RedisStringCommands.SetOption.UPSERT
-                                );
+                                connection
+                                        .stringCommands()
+                                        .set(
+                                                uk,
+                                                uv,
+                                                Expiration.seconds(limit.ttlSec()),
+                                                RedisStringCommands.SetOption.UPSERT);
                             }
                             return null;
                         });

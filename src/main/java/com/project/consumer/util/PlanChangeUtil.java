@@ -9,6 +9,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.producer.test.PlanUnit;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -54,9 +55,9 @@ public class PlanChangeUtil {
             String unitKey = "plan:unit:" + event.subscriptionId();
             String prevUnit = redisTemplate.opsForValue().get(unitKey);
 
-            if ("ULTIMATE".equals(event.unit())) {
+            if (event.unit().equals(PlanUnit.ULTIMATE)) {
                 finalLimit = -1L;
-            } else if ("DAY".equals(event.unit())) {
+            } else if (event.unit().equals(PlanUnit.DAY)) {
                 finalLimit = event.allowanceAmount();
             } else {
                 finalLimit = getMonthFinalLimit(yearMonth, event, prevUnit);

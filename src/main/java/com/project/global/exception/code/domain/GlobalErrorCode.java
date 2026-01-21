@@ -18,7 +18,13 @@ public enum GlobalErrorCode implements BaseErrorCode {
     PLAN_CHANGE_EVENT_PRODUCE_INVALID(
             HttpStatus.BAD_REQUEST, "COMMON_007", "Kafka PlanChange 이벤트 발행 과정에서 에러가 발생했습니다"),
     LUA_SCRIPT_LOAD_INVALID(HttpStatus.BAD_REQUEST, "COMMON_008", "LUA 스크립트를 불러오는 과정에서 에러가 발생했습니다"),
-    JSON_CONVERT_INVALID(HttpStatus.BAD_REQUEST, "COMMON_009", "JSON으로 변환하는 과정에서 에러가 발생했습니다");
+    JSON_CONVERT_INVALID(HttpStatus.BAD_REQUEST, "COMMON_009", "JSON으로 변환하는 과정에서 에러가 발생했습니다"),
+    USAGE_LOG_BATCH_FAILED(HttpStatus.BAD_REQUEST, "COMMON_010", "사용자 데이터 사용량 적재 배치 시스템이 실패하였습니다"),
+    USAGE_NOTIFICATION_PRODUCER_FAILED(
+            HttpStatus.BAD_REQUEST, "COMMON_011", "UsageNotification Produce 과정에서 에러가 발생하였습니다"),
+    USAGE_OUTBOX_WRITER_FAILED(
+            HttpStatus.BAD_REQUEST, "COMMON_012", "UsageOutbox Writer 배치 시스템이 실패하였습니다"),
+    PLAN_NOT_VALID(HttpStatus.BAD_REQUEST, "COMMON_013", "존재하지 않는 요금제입니다");
 
     private final HttpStatus httpStatus;
     private final String customCode;

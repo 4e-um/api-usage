@@ -9,10 +9,9 @@ public record UsageMonthlyKey(Long subId, String period) {
         if (this == oj) {
             return true;
         }
-        if (!(oj instanceof UsageMonthlyKey)) {
+        if (!(oj instanceof UsageMonthlyKey that)) {
             return false;
         }
-        UsageMonthlyKey that = (UsageMonthlyKey) oj;
         return Objects.equals(subId, that.subId) && Objects.equals(period, that.period);
     }
 }

@@ -22,7 +22,7 @@ public class UsageSummaryDailyWriter implements ItemWriter<UsageDailyAggregation
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public void write(Chunk<? extends UsageDailyAggregation> chunk) throws Exception {
+    public void write(Chunk<? extends UsageDailyAggregation> chunk) {
         Map<UsageDailyKey, Long> aggregated = new HashMap<>();
 
         for (UsageDailyAggregation item : chunk) {

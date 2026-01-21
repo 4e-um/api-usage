@@ -8,10 +8,9 @@ public record UsageDailyKey(Long subId, String usageDate) {
         if (this == oj) {
             return true;
         }
-        if (!(oj instanceof UsageDailyKey)) {
+        if (!(oj instanceof UsageDailyKey that)) {
             return false;
         }
-        UsageDailyKey that = (UsageDailyKey) oj;
         return Objects.equals(subId, that.subId) && Objects.equals(usageDate, that.usageDate);
     }
 }

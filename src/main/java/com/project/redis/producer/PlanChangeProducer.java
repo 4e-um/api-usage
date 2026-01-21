@@ -3,7 +3,6 @@ package com.project.redis.producer;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 

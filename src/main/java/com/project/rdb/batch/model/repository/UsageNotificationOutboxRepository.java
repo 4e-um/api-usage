@@ -31,18 +31,6 @@ public class UsageNotificationOutboxRepository {
                 (ps, id) -> ps.setLong(1, id));
     }
 
-    public void markFailed(List<Long> ids, String reason) {
-        jdbcTemplate.batchUpdate(
-                "UPDATE usage_notification_outbox SET status = 'FAILED', failure_reason = ? WHERE"
-                        + " id = ?",
-                ids,
-                ids.size(),
-                (ps, id) -> {
-                    ps.setString(1, reason);
-                    ps.setLong(2, id);
-                });
-    }
-
     public void markFailedWithReasons(Map<Long, String> reasons) {
         jdbcTemplate.batchUpdate(
                 "UPDATE usage_notification_outbox "

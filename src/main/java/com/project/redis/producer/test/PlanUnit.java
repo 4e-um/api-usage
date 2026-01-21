@@ -1,4 +1,4 @@
-package com.project.producer.test;
+package com.project.redis.producer.test;
 
 public enum PlanUnit {
     MONTH,

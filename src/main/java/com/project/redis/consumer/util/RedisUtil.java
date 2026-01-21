@@ -1,4 +1,4 @@
-package com.project.consumer.util;
+package com.project.redis.consumer.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,8 +11,8 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.stereotype.Service;
 
-import com.project.producer.schema.CalculatedLimitSchema;
-import com.project.producer.schema.UsageEventSchema;
+import com.project.redis.producer.schema.CalculatedLimitSchema;
+import com.project.redis.producer.schema.UsageEventSchema;
 
 import lombok.RequiredArgsConstructor;
 

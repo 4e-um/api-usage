@@ -1,8 +1,9 @@
-package com.project.producer;
+package com.project.redis.producer;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.global.exception.ApplicationException;
 import com.project.global.exception.code.domain.GlobalErrorCode;
-import com.project.producer.schema.UsageEventSchema;
+import com.project.redis.producer.schema.UsageEventSchema;
 
 import lombok.RequiredArgsConstructor;
 

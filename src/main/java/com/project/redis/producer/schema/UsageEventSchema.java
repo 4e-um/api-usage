@@ -1,4 +1,4 @@
-package com.project.producer.schema;
+package com.project.redis.producer.schema;
 
 public record UsageEventSchema(
         String eventId,

@@ -1,4 +1,4 @@
-package com.project.consumer;
+package com.project.redis.consumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,12 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.consumer.util.PlanChangeUtil;
-import com.project.consumer.util.RedisUtil;
+import com.project.redis.consumer.util.PlanChangeUtil;
+import com.project.redis.consumer.util.RedisUtil;
 import com.project.global.exception.ApplicationException;
 import com.project.global.exception.code.domain.GlobalErrorCode;
-import com.project.producer.schema.CalculatedLimitSchema;
-import com.project.producer.schema.PlanChangeSchema;
+import com.project.redis.producer.schema.CalculatedLimitSchema;
+import com.project.redis.producer.schema.PlanChangeSchema;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +30,8 @@ public class PlanChangeConsumer {
             id = "plan-change-consumer",
             topics = "change_plan",
             groupId = "plan-change-consumer",
-            containerFactory = "batchKafkaListenerContainerFactory")
+            containerFactory = "kafkaListenerContainerFactory",
+            autoStartup = "false")
     public void consume(List<ConsumerRecord<String, String>> records, Acknowledgment ack) {
         if (records == null || records.isEmpty()) {
             ack.acknowledge();

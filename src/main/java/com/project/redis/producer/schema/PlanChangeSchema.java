@@ -1,8 +1,8 @@
-package com.project.producer.schema;
+package com.project.redis.producer.schema;
 
 import java.time.OffsetDateTime;
 
-import com.project.producer.test.PlanUnit;
+import com.project.redis.producer.test.PlanUnit;
 
 public record PlanChangeSchema(
         String eventId, // 멱등성/추적용

@@ -1,4 +1,4 @@
-package com.project.consumer.util;
+package com.project.redis.consumer.util;
 
 import java.time.Duration;
 import java.time.LocalTime;

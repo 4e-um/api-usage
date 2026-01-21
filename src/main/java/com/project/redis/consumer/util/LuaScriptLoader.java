@@ -1,4 +1,4 @@
-package com.project.consumer.util;
+package com.project.redis.consumer.util;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;

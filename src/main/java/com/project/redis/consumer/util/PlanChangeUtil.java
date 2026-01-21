@@ -1,6 +1,6 @@
-package com.project.consumer.util;
+package com.project.redis.consumer.util;
 
-import static com.project.consumer.util.UsageTimeUtil.toYearMonth;
+import static com.project.redis.consumer.util.UsageTimeUtil.toYearMonth;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -12,9 +12,9 @@ import java.util.List;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.project.producer.schema.CalculatedLimitSchema;
-import com.project.producer.schema.PlanChangeSchema;
-import com.project.producer.test.PlanUnit;
+import com.project.redis.producer.schema.CalculatedLimitSchema;
+import com.project.redis.producer.schema.PlanChangeSchema;
+import com.project.redis.producer.test.PlanUnit;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

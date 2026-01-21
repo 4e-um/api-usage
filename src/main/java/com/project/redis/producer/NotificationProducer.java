@@ -1,4 +1,4 @@
-package com.project.producer;
+package com.project.redis.producer;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

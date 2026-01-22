@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.project.rdb.batch.model.BatchStepMetricsListener;
-import com.project.rdb.batch.model.dto.UsageDailyAggregation;
-import com.project.rdb.batch.model.dto.UsageLogRow;
-import com.project.rdb.batch.model.dto.UsageMonthlyAggregation;
+import com.project.rdb.batch.usageaggregate.dto.UsageDailyAggregation;
+import com.project.rdb.batch.usageaggregate.dto.UsageLogRow;
+import com.project.rdb.batch.usageaggregate.dto.UsageMonthlyAggregation;
 import com.project.rdb.batch.usageaggregate.processor.UsageDailyProcessor;
 import com.project.rdb.batch.usageaggregate.processor.UsageMonthlyProcessor;
 import com.project.rdb.batch.usageaggregate.writer.UsageSummaryDailyWriter;

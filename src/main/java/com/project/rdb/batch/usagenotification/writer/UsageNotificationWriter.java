@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.rdb.batch.model.dto.UsageNotificationCandidate;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationCandidate;
 
 import lombok.RequiredArgsConstructor;
 

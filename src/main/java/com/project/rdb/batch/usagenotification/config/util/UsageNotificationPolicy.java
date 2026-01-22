@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.project.rdb.batch.model.dto.UsageNotificationCandidate;
-import com.project.rdb.batch.model.dto.UsageNotificationSource;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationCandidate;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationSource;
 
 @Component
 public class UsageNotificationPolicy {

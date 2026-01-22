@@ -1,6 +1,6 @@
 package com.project.rdb.kafka.consumer;
 
-import com.project.rdb.batch.model.dto.NotificationMessage;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;

@@ -7,9 +7,7 @@ import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuild
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.project.rdb.batch.model.dto.UsageNotificationOutboxRow;
-
-import java.time.LocalDateTime;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationOutboxRow;
 
 @Configuration
 public class NotificationSendReaderConfig {

@@ -1,4 +1,4 @@
-package com.project.rdb.batch.model.dto;
+package com.project.rdb.batch.usageaggregate.dto;
 
 import java.time.LocalDateTime;
 

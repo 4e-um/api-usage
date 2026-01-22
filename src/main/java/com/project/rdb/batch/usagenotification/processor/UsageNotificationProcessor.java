@@ -3,8 +3,8 @@ package com.project.rdb.batch.usagenotification.processor;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
-import com.project.rdb.batch.model.dto.UsageNotificationCandidate;
-import com.project.rdb.batch.model.dto.UsageNotificationSource;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationCandidate;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationSource;
 import com.project.rdb.batch.usagenotification.config.util.UsageNotificationPolicy;
 
 import lombok.RequiredArgsConstructor;

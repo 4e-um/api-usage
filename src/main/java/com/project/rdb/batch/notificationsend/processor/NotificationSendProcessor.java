@@ -3,11 +3,11 @@ package com.project.rdb.batch.notificationsend.processor;
 import java.util.Map;
 import java.util.UUID;
 
-import com.project.rdb.batch.model.dto.NotificationMessage;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
-import com.project.rdb.batch.model.dto.UsageNotificationOutboxRow;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationOutboxRow;
 
 import lombok.extern.slf4j.Slf4j;
 

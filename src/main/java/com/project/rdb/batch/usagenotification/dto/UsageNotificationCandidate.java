@@ -1,4 +1,4 @@
-package com.project.rdb.batch.model.dto;
+package com.project.rdb.batch.usagenotification.dto;
 
 public record UsageNotificationCandidate(
         Long subId,

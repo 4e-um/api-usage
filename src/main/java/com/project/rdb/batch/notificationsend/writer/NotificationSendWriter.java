@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import com.project.rdb.batch.model.dto.NotificationMessage;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,7 +14,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.rdb.batch.model.dto.NotificationSendTask;
+import com.project.rdb.batch.notificationsend.dto.NotificationSendTask;
 import com.project.rdb.batch.model.repository.UsageNotificationOutboxRepository;
 
 import lombok.RequiredArgsConstructor;

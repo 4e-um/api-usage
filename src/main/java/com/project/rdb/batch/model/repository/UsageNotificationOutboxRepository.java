@@ -24,8 +24,7 @@ public class UsageNotificationOutboxRepository {
 
     public void markSent(List<Long> ids) {
         jdbcTemplate.batchUpdate(
-                "UPDATE usage_notification_outbox SET status = 'SENT', sent_at = now() WHERE id ="
-                        + " ?",
+                "UPDATE usage_notification_outbox SET status = 'SENT', sent_at = now() WHERE id = ?",
                 ids,
                 ids.size(),
                 (ps, id) -> ps.setLong(1, id));

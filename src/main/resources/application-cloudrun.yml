@@ -9,7 +9,9 @@
 #   - POSTGRES_PASSWORD: 데이터베이스 비밀번호
 #   - REDIS_ENDPOINT: Redis 외부 IP:포트
 #   - REDIS_PASSWORD: Redis 비밀번호
-#   - KAFKA_CREDENTIALS: Kafka 인증 정보 (JSON)
+#   - KAFKA_BOOTSTRAP_SERVERS: Kafka 부트스트랩 서버
+#   - KAFKA_API_KEY: Kafka API 키
+#   - KAFKA_API_SECRET: Kafka API 시크릿
 # =============================================================================
 
 spring:
@@ -35,3 +37,13 @@ spring:
   data:
     redis:
       url: redis://default:${REDIS_PASSWORD}@${REDIS_ENDPOINT}
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username='${KAFKA_API_KEY}'
+        password='${KAFKA_API_SECRET}';

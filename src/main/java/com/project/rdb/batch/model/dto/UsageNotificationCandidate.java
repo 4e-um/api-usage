@@ -4,7 +4,8 @@ public record UsageNotificationCandidate(
         Long subId,
         String period,
         String unit,
+        String planName,
         int threshold,
-        int percent,
+        double percent,
         long totalUsedMb,
         long allotmentMb) {}

@@ -18,15 +18,16 @@ public class UsageNotificationPolicy {
         long totalUsedMb = source.totalUsedBytes() / (1024 * 1024);
         long allotmentMb = source.allotmentAmount();
 
-        int percent = (int) ((totalUsedMb * 100L) / allotmentMb);
+        double percent = (double) (totalUsedMb * 100L) / allotmentMb;
 
-        return decideThreshold(percent)
+        return decideThreshold((int) percent)
                 .map(
                         threshold ->
                                 new UsageNotificationCandidate(
                                         source.subId(),
                                         source.period(),
                                         source.unit(),
+                                        source.planName(),
                                         threshold,
                                         percent,
                                         totalUsedMb,

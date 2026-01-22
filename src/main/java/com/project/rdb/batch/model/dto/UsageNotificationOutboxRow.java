@@ -1,11 +1,16 @@
 package com.project.rdb.batch.model.dto;
 
+import java.time.LocalDateTime;
+
 public record UsageNotificationOutboxRow(
         Long id,
         Long subId,
         String period,
-        String unit,
+        String planName,
         int threshold,
-        int percent,
+        double percent,
         long totalUsedMb,
-        long allotmentMb) {}
+        long allotmentMb,
+        String phoneNumber,
+        String email,
+        LocalDateTime createdAt) {}

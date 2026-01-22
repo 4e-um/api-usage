@@ -60,6 +60,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     runtimeOnly 'org.postgresql:postgresql'
+    // Cloud SQL Socket Factory (Cloud Run 연결용)
+    runtimeOnly 'com.google.cloud.sql:postgres-socket-factory:1.21.0'
 
     // Batch
     implementation 'org.springframework.boot:spring-boot-starter-batch'

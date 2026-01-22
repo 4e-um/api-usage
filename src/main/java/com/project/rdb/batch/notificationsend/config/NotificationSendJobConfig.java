@@ -1,5 +1,6 @@
 package com.project.rdb.batch.notificationsend.config;
 
+import com.project.rdb.batch.model.dto.NotificationMessage;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobScope;
@@ -12,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.project.rdb.batch.model.dto.UsageNotificationEvent;
 import com.project.rdb.batch.model.dto.UsageNotificationOutboxRow;
 import com.project.rdb.batch.notificationsend.processor.NotificationSendProcessor;
 import com.project.rdb.batch.notificationsend.writer.NotificationSendWriter;
@@ -44,7 +44,7 @@ public class NotificationSendJobConfig {
     @Bean
     public Step notificationSendStep() {
         return new StepBuilder("notificationSendStep", jobRepository)
-                .<UsageNotificationOutboxRow, UsageNotificationEvent>chunk(CHUNK_SIZE, txManager)
+                .<UsageNotificationOutboxRow, NotificationMessage>chunk(CHUNK_SIZE, txManager)
                 .reader(outboxReader)
                 .processor(notificationSendProcessor)
                 .writer(notificationSendWriter)

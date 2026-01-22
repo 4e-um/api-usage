@@ -15,9 +15,13 @@ spring:
     password: ${POSTGRES_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
+  batch:
+    job:
+      enabled: false
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
@@ -33,17 +37,48 @@ spring:
       url: redis://${REDIS_USERNAME:default}:${REDIS_PASSWORD:}@${REDIS_ENDPOINT:localhost:6379}
 
   kafka:
-    bootstrap-servers: pkc-oxqxx9.us-east-1.aws.confluent.cloud:9092
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
 
     properties:
       security.protocol: SASL_SSL
       sasl.mechanism: PLAIN
       sasl.jaas.config: >
         org.apache.kafka.common.security.plain.PlainLoginModule required
-        username='EPO6DS6OXW7GYVEE'
-        password='cfltJj+U/TvM2TfzfqxpXIu5xDE/bPGe5sfIff5mrLZ9Usx4K9LudKBWPLIGG3QQ';
+        username='${KAFKA_API_KEY}'
+        password='${KAFKA_API_SECRET}';
+
+    producer:
+      retries: 2147483647
+      batch-size: 65536
+      compression-type: lz4
+      buffer-memory: 67108864
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+      properties:
+        enable-idempotence: true
+        linger.ms: 20
+        compression.type: lz4
+        max.in.flight.requests.per.connection: 5
+
     consumer:
+      group-id: usage-notification-worker
       auto-offset-reset: earliest
+      enable-auto-commit: false
+
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+      max-poll-records: 1
+      max-poll-interval-ms: 300000
+      session-timeout-ms: 10000
+      heartbeat-interval-ms: 3000
+
+      properties:
+        spring.json.trusted.packages: com.project.rdb.batch.model.dto
+
+    listener:
+      auto-startup: false
 
 
 

@@ -10,7 +10,7 @@ public class Sqls {
                 sub_id, usage_date, total_used_bytes, updated_at
             )
             VALUES (
-                :subId, :period, :delta, NOW()
+                :subId, :usageDate, :delta, NOW()
             )
             ON CONFLICT (sub_id, usage_date)
             DO UPDATE SET

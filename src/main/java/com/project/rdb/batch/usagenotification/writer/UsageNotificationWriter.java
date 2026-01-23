@@ -31,13 +31,17 @@ public class UsageNotificationWriter implements ItemWriter<UsageNotificationCand
         String sql =
                 """
                 INSERT INTO usage_notification_outbox
-                    (sub_id, period, 
-                     plan_name, unit, 
-                     threshold, percent, 
-                     total_used_mb, allotment_mb, 
+                    (sub_id, period,
+                     plan_name, unit,
+                     threshold, percent,
+                     total_used_mb, allotment_mb,
                      status, created_at)
                 VALUES
-                    (:subId, :period, :planName, :unit, :threshold, :percent, :totalUsedMb, :allotmentMb, 'PENDING', NOW())
+                    (:subId, :period,
+                     :planName, :unit,
+                     :threshold, :percent,
+                     :totalUsedMb, :allotmentMb,
+                     'PENDING', NOW())
                 ON CONFLICT (sub_id, period, unit, threshold)
                 DO NOTHING
                 """;

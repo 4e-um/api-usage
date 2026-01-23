@@ -9,9 +9,9 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.project.rdb.batch.usageaggregate.config.Sqls;
 import com.project.rdb.batch.usageaggregate.dto.UsageMonthlyAggregation;
 import com.project.rdb.batch.usageaggregate.dto.UsageMonthlyKey;
-import com.project.rdb.batch.usageaggregate.config.Sqls;
 
 import lombok.RequiredArgsConstructor;
 

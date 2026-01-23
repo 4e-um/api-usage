@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,8 +13,9 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.rdb.batch.notificationsend.dto.NotificationSendTask;
 import com.project.rdb.batch.model.repository.UsageNotificationOutboxRepository;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
+import com.project.rdb.batch.notificationsend.dto.NotificationSendTask;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,9 +45,7 @@ public class NotificationSendWriter implements ItemWriter<NotificationMessage> {
         for (NotificationMessage event : items) {
             try {
                 String payload = objectMapper.writeValueAsString(event);
-                String key = String.valueOf(
-                        event.subscriptionInfo().get("subId")
-                );
+                String key = String.valueOf(event.subscriptionInfo().get("subId"));
 
                 CompletableFuture<SendResult<String, String>> future =
                         kafkaTemplate.send("noti-tp", key, payload);

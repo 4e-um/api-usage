@@ -1,4 +1,9 @@
 package com.project.rdb.batch.usagenotification.dto;
 
 public record UsageNotificationSource(
-        Long subId, String period, String unit, String planName, long totalUsedBytes, long allotmentAmount) {}
+        Long subId,
+        String period,
+        String unit,
+        String planName,
+        long totalUsedBytes,
+        long allotmentAmount) {}

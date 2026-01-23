@@ -8,6 +8,4 @@ public record NotificationMessage(
         Long id,
         Long templateGroupId,
         Map<String, Object> subscriptionInfo,
-        Map<String, Object> variables
-) {
-}
+        Map<String, Object> variables) {}

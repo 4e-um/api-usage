@@ -3,10 +3,10 @@ package com.project.rdb.batch.notificationsend.processor;
 import java.util.Map;
 import java.util.UUID;
 
-import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import com.project.rdb.batch.usagenotification.dto.UsageNotificationOutboxRow;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,8 +35,6 @@ public class NotificationSendProcessor
                         "allotmentMb", item.allotmentMb(),
                         "phoneNumber", item.phoneNumber(),
                         "email", item.email(),
-                        "createdAt", item.createdAt()
-                )
-        );
+                        "createdAt", item.createdAt()));
     }
 }

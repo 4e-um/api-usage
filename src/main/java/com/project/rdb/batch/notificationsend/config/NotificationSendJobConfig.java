@@ -1,6 +1,5 @@
 package com.project.rdb.batch.notificationsend.config;
 
-import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobScope;
@@ -13,9 +12,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.project.rdb.batch.usagenotification.dto.UsageNotificationOutboxRow;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import com.project.rdb.batch.notificationsend.processor.NotificationSendProcessor;
 import com.project.rdb.batch.notificationsend.writer.NotificationSendWriter;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationOutboxRow;
 
 import lombok.RequiredArgsConstructor;
 

@@ -24,7 +24,8 @@ public enum GlobalErrorCode implements BaseErrorCode {
             HttpStatus.BAD_REQUEST, "COMMON_011", "UsageNotification Produce 과정에서 에러가 발생하였습니다"),
     USAGE_OUTBOX_WRITER_FAILED(
             HttpStatus.BAD_REQUEST, "COMMON_012", "UsageOutbox Writer 배치 시스템이 실패하였습니다"),
-    PLAN_NOT_VALID(HttpStatus.BAD_REQUEST, "COMMON_013", "존재하지 않는 요금제입니다");
+    PLAN_NOT_VALID(HttpStatus.BAD_REQUEST, "COMMON_013", "존재하지 않는 요금제입니다"),
+    BATCH_NOT_FINISHED(HttpStatus.BAD_REQUEST, "COMMON_014", "이전 배치 작업이 끝나지 않았습니다");
 
     private final HttpStatus httpStatus;
     private final String customCode;

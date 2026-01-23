@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.project.rdb.batch.model.dto.UsageNotificationEvent;
-import com.project.rdb.batch.model.dto.UsageNotificationOutboxRow;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 import com.project.rdb.batch.notificationsend.processor.NotificationSendProcessor;
 import com.project.rdb.batch.notificationsend.writer.NotificationSendWriter;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationOutboxRow;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,7 +44,7 @@ public class NotificationSendJobConfig {
     @Bean
     public Step notificationSendStep() {
         return new StepBuilder("notificationSendStep", jobRepository)
-                .<UsageNotificationOutboxRow, UsageNotificationEvent>chunk(CHUNK_SIZE, txManager)
+                .<UsageNotificationOutboxRow, NotificationMessage>chunk(CHUNK_SIZE, txManager)
                 .reader(outboxReader)
                 .processor(notificationSendProcessor)
                 .writer(notificationSendWriter)

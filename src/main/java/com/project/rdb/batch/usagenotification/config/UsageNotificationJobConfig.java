@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.project.rdb.batch.model.BatchStepMetricsListener;
-import com.project.rdb.batch.model.dto.UsageNotificationCandidate;
-import com.project.rdb.batch.model.dto.UsageNotificationSource;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationCandidate;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationSource;
 import com.project.rdb.batch.usagenotification.processor.UsageNotificationProcessor;
 import com.project.rdb.batch.usagenotification.writer.UsageNotificationWriter;
 

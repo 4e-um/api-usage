@@ -38,7 +38,7 @@ public class UsageNotificationOutbox {
     private int threshold;
 
     @Column(nullable = false)
-    private int percent;
+    private double percent;
 
     @Column(name = "total_used_mb", nullable = false)
     private Long totalUsedMb;

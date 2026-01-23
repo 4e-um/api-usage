@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.project.rdb.batch.model.dto.UsageLogRow;
+import com.project.rdb.batch.usageaggregate.dto.UsageLogRow;
 
 @Configuration
 public class UsageLogDailyReaderConfig {

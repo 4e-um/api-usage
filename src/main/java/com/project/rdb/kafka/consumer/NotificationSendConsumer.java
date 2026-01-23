@@ -1,12 +1,13 @@
 package com.project.rdb.kafka.consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.rdb.batch.model.dto.UsageNotificationEvent;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +22,15 @@ public class NotificationSendConsumer {
 
     @KafkaListener(
             topics = "notification-usage",
-            containerFactory = "kafkaListenerContainerFactory")
+            containerFactory = "kafkaListenerContainerFactory",
+            autoStartup = "false")
+    @Profile("notification-worker")
     public void consume(ConsumerRecord<String, String> record, Acknowledgment ack) {
         log.info("🔥 CONSUME START offset={}, value={}", record.offset(), record.value());
 
         try {
-            UsageNotificationEvent event =
-                    objectMapper.readValue(record.value(), UsageNotificationEvent.class);
+            NotificationMessage event =
+                    objectMapper.readValue(record.value(), NotificationMessage.class);
 
             String eventId = event.eventId().toString();
 

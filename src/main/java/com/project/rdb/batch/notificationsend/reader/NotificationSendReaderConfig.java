@@ -7,7 +7,7 @@ import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuild
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.project.rdb.batch.model.dto.UsageNotificationOutboxRow;
+import com.project.rdb.batch.usagenotification.dto.UsageNotificationOutboxRow;
 
 @Configuration
 public class NotificationSendReaderConfig {
@@ -19,17 +19,24 @@ public class NotificationSendReaderConfig {
         String sql =
                 """
                     SELECT
-                        id,
-                        sub_id,
-                        period,
-                        unit,
-                        threshold,
-                        percent,
-                        total_used_mb,
-                        allotment_mb
-                    FROM usage_notification_outbox
-                    WHERE status = 'PENDING'
-                    ORDER BY id
+                        o.id,
+                        o.sub_id,
+                        o.period,
+                        o.plan_name,
+                        o.threshold,
+                        o.percent,
+                        o.total_used_mb,
+                        o.allotment_mb,
+                        s.phone_number,
+                        c.email_enc,
+                        o.created_at
+                    FROM usage_notification_outbox o
+                    JOIN subscription s
+                      ON s.sub_id = o.sub_id
+                    JOIN customer c
+                      ON c.customer_id = s.customer_id
+                    WHERE o.status = 'PENDING'
+                    ORDER BY o.id
                     """;
 
         return new JdbcCursorItemReaderBuilder<UsageNotificationOutboxRow>()
@@ -43,11 +50,14 @@ public class NotificationSendReaderConfig {
                                         rs.getLong("id"),
                                         rs.getLong("sub_id"),
                                         rs.getString("period"),
-                                        rs.getString("unit"),
+                                        rs.getString("plan_name"),
                                         rs.getInt("threshold"),
-                                        rs.getInt("percent"),
+                                        rs.getDouble("percent"),
                                         rs.getLong("total_used_mb"),
-                                        rs.getLong("allotment_mb")))
+                                        rs.getLong("allotment_mb"),
+                                        rs.getString("phone_number"),
+                                        rs.getString("email_enc"),
+                                        rs.getTimestamp("created_at").toLocalDateTime()))
                 .build();
     }
 }

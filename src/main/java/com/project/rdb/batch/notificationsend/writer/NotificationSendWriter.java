@@ -13,15 +13,15 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.rdb.batch.model.dto.NotificationSendTask;
-import com.project.rdb.batch.model.dto.UsageNotificationEvent;
 import com.project.rdb.batch.model.repository.UsageNotificationOutboxRepository;
+import com.project.rdb.batch.notificationsend.dto.NotificationMessage;
+import com.project.rdb.batch.notificationsend.dto.NotificationSendTask;
 
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class NotificationSendWriter implements ItemWriter<UsageNotificationEvent> {
+public class NotificationSendWriter implements ItemWriter<NotificationMessage> {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final UsageNotificationOutboxRepository repository;
@@ -29,10 +29,10 @@ public class NotificationSendWriter implements ItemWriter<UsageNotificationEvent
     private static final int MAX_FAILURE_REASON_LENGTH = 255;
 
     @Override
-    public void write(Chunk<? extends UsageNotificationEvent> items) {
+    public void write(Chunk<? extends NotificationMessage> items) {
 
         // usageNotificationOutboxId 추출
-        List<Long> ids = items.getItems().stream().map(UsageNotificationEvent::id).toList();
+        List<Long> ids = items.getItems().stream().map(NotificationMessage::id).toList();
 
         // PROCESSING Status 먼저 DB 반영
         repository.markProcessing(ids);
@@ -42,12 +42,13 @@ public class NotificationSendWriter implements ItemWriter<UsageNotificationEvent
 
         Map<Long, String> failedReasons = new HashMap<>();
 
-        for (UsageNotificationEvent event : items) {
+        for (NotificationMessage event : items) {
             try {
                 String payload = objectMapper.writeValueAsString(event);
+                String key = String.valueOf(event.subscriptionInfo().get("subId"));
 
                 CompletableFuture<SendResult<String, String>> future =
-                        kafkaTemplate.send("notification-usage", event.subId().toString(), payload);
+                        kafkaTemplate.send("noti-tp", key, payload);
 
                 tasks.add(new NotificationSendTask(event, future));
             } catch (Exception e) {

@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
-import com.project.rdb.batch.model.dto.UsageLogRow;
-import com.project.rdb.batch.model.dto.UsageMonthlyAggregation;
+import com.project.rdb.batch.usageaggregate.dto.UsageLogRow;
+import com.project.rdb.batch.usageaggregate.dto.UsageMonthlyAggregation;
 
 @Component
 public class UsageMonthlyProcessor implements ItemProcessor<UsageLogRow, UsageMonthlyAggregation> {

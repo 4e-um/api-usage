@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
-import com.project.rdb.batch.model.dto.UsageDailyAggregation;
-import com.project.rdb.batch.model.dto.UsageLogRow;
+import com.project.rdb.batch.usageaggregate.dto.UsageDailyAggregation;
+import com.project.rdb.batch.usageaggregate.dto.UsageLogRow;
 
 @Component
 public class UsageDailyProcessor implements ItemProcessor<UsageLogRow, UsageDailyAggregation> {

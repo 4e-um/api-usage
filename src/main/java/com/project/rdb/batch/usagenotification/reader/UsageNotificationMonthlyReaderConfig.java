@@ -1,5 +1,7 @@
 package com.project.rdb.batch.usagenotification.reader;
 
+import java.time.LocalDateTime;
+
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -18,8 +20,8 @@ public class UsageNotificationMonthlyReaderConfig {
     @StepScope
     public JdbcCursorItemReader<UsageNotificationSource> usageNotificationMonthlyReader(
             DataSource dataSource,
-            @Value("#{jobParameters['fromTime']}") String fromTime,
-            @Value("#{jobParameters['toTime']}")   String toTime) {
+            @Value("#{jobParameters['fromTime']}") LocalDateTime fromTime,
+            @Value("#{jobParameters['toTime']}") LocalDateTime toTime) {
 
         String sql =
                 """
@@ -33,8 +35,8 @@ public class UsageNotificationMonthlyReaderConfig {
                 FROM usage_summary_monthly usm
                 JOIN subscription_plan sp
                   ON sp.sub_id = usm.sub_id
-                WHERE usm.updated_at >= ?::timestamp
-                  AND usm.updated_at <  ?::timestamp
+                WHERE usm.updated_at >= ?
+                  AND usm.updated_at <  ?
                   AND sp.allotment_amount > 0
                   AND sp.allotment_amount != 5120
                 ORDER BY usm.sub_id
@@ -45,10 +47,11 @@ public class UsageNotificationMonthlyReaderConfig {
                 .dataSource(dataSource)
                 .sql(sql)
                 .fetchSize(1000)
-                .preparedStatementSetter(ps -> {
-                    ps.setObject(1, fromTime);
-                    ps.setObject(2, toTime);
-                })
+                .preparedStatementSetter(
+                        ps -> {
+                            ps.setObject(1, fromTime);
+                            ps.setObject(2, toTime);
+                        })
                 .rowMapper(
                         (rs, rowNum) ->
                                 new UsageNotificationSource(

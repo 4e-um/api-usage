@@ -55,6 +55,8 @@ spring:
         org.apache.kafka.common.security.plain.PlainLoginModule required
         username='${KAFKA_API_KEY}'
         password='${KAFKA_API_SECRET}';
+    listener:
+      auto-startup: true
 
 # MongoDB Health Check 비활성화
 management:
